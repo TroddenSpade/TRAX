@@ -2,14 +2,19 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import { VitePWA } from 'vite-plugin-pwa'
 
+// Served from the root of a GitHub Pages custom domain (https://trax.parsasam.ir/).
+// Override VITE_BASE for a project sub-path (e.g. "/TRAX/").
+const base = process.env.VITE_BASE || '/'
+
 export default defineConfig({
+  base,
   plugins: [
     react(),
     VitePWA({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.png', 'apple-touch-icon.png', 'logo.svg', 'logo.png'],
       manifest: {
-        id: '/',
+        id: base,
         name: 'TRAX — AI Trading Desk',
         short_name: 'TRAX',
         description:
@@ -18,8 +23,8 @@ export default defineConfig({
         background_color: '#080A0C',
         display: 'standalone',
         orientation: 'any',
-        start_url: '/',
-        scope: '/',
+        start_url: base,
+        scope: base,
         lang: 'en',
         dir: 'ltr',
         categories: ['finance', 'productivity'],
